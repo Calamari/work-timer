@@ -1,0 +1,14 @@
+{
+  "apps": [{
+    "name": "work-timer-server",
+    "script": "server.js",
+    "args": "server",
+    "watch": ["web-server", "models", "node_modules"],
+    "log_date_format": "YYYY-MM-DD HH:mm Z",
+    "log_file": "./log/work-timer.log",
+    "error_file": "./log/work-timer-err.log",
+    "out_file": "./log/work-timer-out.log",
+    "pid_file": "./work-timer.pid"
+
+  }]
+}

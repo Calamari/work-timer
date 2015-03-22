@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Work Timer</title>
+</head>
+<body>
+  {{title}}
+  <ul>
+    {{#each projects}}
+      <li>
+        <strong><a href="/projects/{{name}}">{{name}}</a></strong>
+        {{#if currentStartedTime}}
+          <span>currently timing</span>
+          <a href="/end-timer/{{name}}">Stop timer</a>
+        {{/if}}
+        {{#unless $root.anyTimerStarted}}
+          <a href="/start-timer/{{name}}">Start timer</a>
+        {{/unless}}
+      </li>
+    {{/each}}
+  </ul>
+</body>
+</html>
