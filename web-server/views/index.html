@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Work Timer</title>
-</head>
-<body>
-  {{title}}
-  <ul>
-    {{#each projects}}
-      <li>
-        <strong><a href="/projects/{{name}}">{{name}}</a></strong>
-        {{#if currentStartedTime}}
-          <span>currently timing</span>
-          <a href="/end-timer/{{name}}">Stop timer</a>
-        {{/if}}
-        {{#unless $root.anyTimerStarted}}
-          <a href="/start-timer/{{name}}">Start timer</a>
-        {{/unless}}
+<div class="rows">
+  <div class="column small-12">
+    <ul class="accordion" data-accordion>
+      {{#each projects}}
+      <li class="accordion-navigation">
+        <a href="#panel1a">{{name}} {{#if currentStartedTime}}(runs){{/if}}</a>
+        <div id="panel1a" class="content{{#if currentStartedTime}} active{{/if}}">
+          {{#if currentStartedTime}}
+            <a class="button expanded" href="/end-timer/{{name}}">Stop timer</a>
+          {{/if}}
+          {{#unless $parent.anyTimerStarted}}
+            <a class="button expanded" href="/start-timer/{{name}}">Start timer</a>
+          {{/unless}}
+          <p><a href="/projects/{{name}}">Show details</a></p>
+        </div>
       </li>
-    {{/each}}
-  </ul>
-</body>
-</html>
+      {{/each}}
+    </ul>
+  </div>
+</div>

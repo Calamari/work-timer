@@ -5,10 +5,12 @@ TODOs:
 **/
 
 var Hapi = require('hapi');
+var path = require('path');
 
 var Projects = require('../models/projects');
 var Timer = require('../models/timer');
 var helpers = require('../helpers');
+var ProjectView = require('../views/project_view');
 
 require('handlebars').registerHelper('showTime', function(time) {
   return helpers.showTime(time);
@@ -17,7 +19,15 @@ require('handlebars').registerHelper('showTime', function(time) {
 function init(app, config) {
   config = config || {};
 
-  var server = new Hapi.Server();
+  var server = new Hapi.Server({
+    connections: {
+      routes: {
+        files: {
+          relativeTo: path.join(__dirname, 'public')
+        }
+      }
+    }
+  });
   server.connection({
     port: config.port || 8181
   });
@@ -28,7 +38,9 @@ function init(app, config) {
     },
     relativeTo: __dirname,
     path: './views',
+    layout: true,
     layoutPath: './views/layouts',
+    layoutKeyword: 'body'
     // helpersPath: './views/helpers'
   });
 
@@ -67,13 +79,29 @@ function init(app, config) {
     method: 'GET',
     path: '/projects/{projectName}',
     handler: function(req, res) {
+      console.log("CALL", ProjectView.getProject(req.params.projectName));
       var project = Projects.get(req.params.projectName);
+      console.log( ProjectView.getProject(req.params.projectName).trackings.store['2015']);
+      console.log(project.times);
       res.view('projects', {
-        project: project,
+        breadcrumb: project.name,
+        project: ProjectView.getProject(req.params.projectName),
+        // project: project,
         times: project.timesOfProject(),
         days: project.aggregatedTimesOfProject('days'),
         weeks: project.aggregatedTimesOfProject('weeks')
       });
+    }
+  });
+
+  // Serve static assets
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: path.join(__dirname, 'public')
+      }
     }
   });
 

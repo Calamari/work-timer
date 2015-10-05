@@ -13,3 +13,13 @@ Let me track my work.
 
 - Terminal commands are to found within `index.js`. Call like this: `./index.js start MyProject1`
 - Webfrontend is found in `server.js`. Start server like this: `node server.js`
+
+## Development
+
+We use foundation scss and ruby sass to compile it css.
+
+- Run watching of sass via `bundle exec compass watch`
+
+If node and node-sass would find libsass again, I would use this:
+
+- Run gulp watch tasks `gulp dev`

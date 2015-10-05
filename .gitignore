@@ -1,2 +1,6 @@
-log/
-node_modules/
+*.DS_Store
+log/*
+node_modules/*
+web-server/public/css/*
+.sass-cache/*
+bower_components/

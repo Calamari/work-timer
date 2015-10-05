@@ -1,35 +1,131 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Work Timer</title>
-</head>
-<body>
-  <h1>{{project.name}}</h1>
-  <h2>Recordings:</h2>
-  <ul>
-    {{#each times}}
-      <li>
-        {{start}} - {{end}} [{{showTime total}}] {{id}}
-      </li>
+<div class="rows">
+  <table class="small-12 column end">
+    {{#each project.weeks}}
+      <thead>
+        <tr>
+          <td colspan="2">{{@key}}</td>
+          <td>[{{showTime this}}]</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.daysOfWeek @key}}
+          <tr data-toggle="#tag-{{day}}">
+            <td>{{day}}</td>
+            <td></td>
+            <td>[{{showTime time}}]</td>
+          </tr>
+          <tr id="tag-{{day}}" style="display: none;" tabindex="-1">
+            <td colspan="3">
+              ferfr
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
     {{/each}}
+  </table>
+</div>
+
+
+<div class="rows">
+  <table class="small-12 column end">
+    {{#each project.trackings.store}}
+      <thead>
+        <tr>
+          <td colspan="2">{{$key}}</td>
+          <td>[40h 10m]</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-toggle="#tag-13-3-2015">
+          <td>13.3.</td>
+          <td>45fac320-d0d9-11e4-af67-1fb9352924b9</td>
+          <td>[5h 3m]</td>
+        </tr>
+        <tr id="tag-13-3-2015" style="display: none;" tabindex="-1">
+          <td colspan="3">
+            ferfr
+          </td>
+        </tr>
+        <tr data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
+          <td>13.3.</td>
+          <td>45fac320-d0d9-11e4-af67-1fb9352924b9</td>
+          <td>[5h 3m]</td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+              <li><a href="#">This is a link</a></li>
+              <li><a href="#">This is another</a></li>
+              <li><a href="#">Yet another</a></li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    {{/each}}
+  </table>
+</div>
+
+<div class="rows">
+  <table class="small-12 column end">
+    <thead>
+      <tr>
+        <td colspan="2">Week 13 (13.3 - 18.3.)</td>
+        <td>[40h 10m]</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-toggle="#tag-13-3-2015">
+        <td>13.3.</td>
+        <td>45fac320-d0d9-11e4-af67-1fb9352924b9</td>
+        <td>[5h 3m]</td>
+      </tr>
+      <tr id="tag-13-3-2015" style="display: none;" tabindex="-1">
+        <td colspan="3">
+          ferfr
+        </td>
+      </tr>
+      <tr data-dropdown="drop1" aria-controls="drop1" aria-expanded="false">
+        <td>13.3.</td>
+        <td>45fac320-d0d9-11e4-af67-1fb9352924b9</td>
+        <td>[5h 3m]</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+  <ul id="drop1" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+    <li><a href="#">This is a link</a></li>
+    <li><a href="#">This is another</a></li>
+    <li><a href="#">Yet another</a></li>
   </ul>
 
-  <h2>Days:</h2>
-  <ul>
-    {{#each days}}
-      <li>
-        {{@key}}: {{showTime this}}
-      </li>
-    {{/each}}
-  </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  <h2>Weeks:</h2>
-  <ul>
-    {{#each weeks}}
-      <li>
-        {{@key}}: {{showTime this}}
-      </li>
-    {{/each}}
-  </ul>
-</body>
-</html>
+<h2>Recordings:</h2>
+<ul>
+  {{#each times}}
+    <li>
+      {{start}} - {{end}} [{{showTime total}}] {{id}}
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Days:</h2>
+<ul>
+  {{#each days}}
+    <li>
+      {{@key}}: {{showTime this}}
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Weeks:</h2>
+<ul>
+  {{#each weeks}}
+    <li>
+      {{@key}}: {{showTime this}}
+    </li>
+  {{/each}}
+</ul>

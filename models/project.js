@@ -1,9 +1,6 @@
 
 var moment = require('moment');
 
-console.log("hfeiufhiuerhiufhaleriuhfiuaehlfiua");
-console.log(moment.version);
-
 function Project(name) {
   this.name = name;
   this.times = [];
@@ -44,7 +41,7 @@ Project.prototype.aggregatedTimesOfProject = function aggregatedTimesOfProject(a
   var result = {};
   var aggregates = {
     days: function(date) {
-      return moment(date).format('DD.MM.YYYY');//date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear();
+      return moment(date).format('DD.MM.YYYY');
     },
     weeks: function(date) {
       date = moment(date);
@@ -53,12 +50,10 @@ Project.prototype.aggregatedTimesOfProject = function aggregatedTimesOfProject(a
   };
   this.times.forEach(function(time) {
     var day = aggregates[aggregate](time.start);
-    console.log("DAY", day);
     if (!result[day]) {
       result[day] = 0;
     }
     result[day] += time.end - time.start;
-    console.log("DAY", day, this.additionalTimes[day]);
     if (this.additionalTimes[day]) {
       result[day] += this.additionalTimes[day];
     }
